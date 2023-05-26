@@ -3,7 +3,7 @@ import axios from "axios";
 import { useToast } from "vue-toastification";
 
 export const admin = defineStore("admin", {
-  state: () => ({ token: "", users: [] }),
+  state: () => ({ token: "", users: [], role: "admin" }),
   getters: { isRegisteration: ({ token }) => token !== "" },
   actions: {
     async getAllUsers() {
@@ -20,6 +20,7 @@ export const admin = defineStore("admin", {
       const { email, password } = data;
       try {
         const res = await axios.post("/login", { email, password });
+        this.role = res.data.user.role;
         return (this.token = res.data.token);
       } catch (error) {
         toast.error(error.response.data.message);

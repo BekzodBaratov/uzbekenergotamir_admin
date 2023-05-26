@@ -10,6 +10,10 @@
         >
           {{ thead }}
         </th>
+        <th
+          v-if="tableData.isSuperAdmin"
+          class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+        ></th>
       </tr>
     </thead>
 
@@ -36,7 +40,10 @@
           {{ item?.role }}
         </td>
 
-        <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
+        <td
+          v-if="tableData.isSuperAdmin"
+          class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium"
+        >
           <button
             class="bg-[#DC3545] text-white px-4 py-2 rounded-[8px] transition-all duration-300 hover:bg-[red]"
             @click="deleteUser(item._id)"

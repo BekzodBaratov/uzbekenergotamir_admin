@@ -1,9 +1,9 @@
 <template>
   <section>
     <div class="flex justify-between items-center mb-4">
-      <h3 class="text-gray-700 text-3xl font-medium">Product bo'limi</h3>
+      <h3 class="text-gray-700 text-3xl font-medium">Calculate bo'limi</h3>
       <router-link to="/calculates/add">
-        <SButton variant="primary">Yangi product qo'shish </SButton>
+        <SButton variant="primary">Yangi calculate qo'shish</SButton>
       </router-link>
     </div>
 

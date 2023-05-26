@@ -9,7 +9,9 @@
     </div>
 
     <div class="flex flex-col mt-8 gap-3">
-      <SButton variant="primary" class="ml-auto mt-3" @click="onSubmit">Add User</SButton>
+      <SButton v-if="adminsStore.role === 'superadmin'" variant="primary" class="ml-auto mt-3" @click="onSubmit"
+        >Add Admin</SButton
+      >
       <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
         <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
           <Table :tableData="tableData" @delete="fetchDelete"></Table>
@@ -20,7 +22,7 @@
 </template>
 
 <script setup>
-import { reactive, watch } from "@vue/runtime-core";
+import { reactive, watch, computed } from "@vue/runtime-core";
 import StatisticCard from "../cards/statistic.card.vue";
 import Table from "/src/components/UserTable.vue";
 import SButton from "../buttons/SButton.vue";
@@ -62,13 +64,16 @@ watch(
   }
 );
 const tableData = reactive({
-  thead: ["ISMI", "OBUNA VAQTI", "ROLE", ""],
+  thead: ["ISMI", "OBUNA VAQTI", "ROLE"],
   tbody: [],
+  isSuperAdmin: false,
 });
+tableData.isSuperAdmin = computed(() => adminsStore.role === "superadmin");
 watch(
   () => adminsStore.users,
   (data) => (tableData.tbody = data)
 );
+
 const fetchDelete = (id) => adminsStore.delUser(id);
 const onSubmit = () => {
   router.push("/users/add");

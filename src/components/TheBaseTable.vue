@@ -19,7 +19,8 @@
     <tbody class="bg-white">
       <tr v-for="item in tableData.tbody" :key="item[0]">
         <td v-for="el in item" :key="el" class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-          <p class="text-primary">{{ el }}</p>
+          <p v-if="!el?.secure_url" class="line-clamp-3">{{ el }}</p>
+          <img class="w-full" v-else :src="el.secure_url" alt="image" />
         </td>
 
         <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
@@ -38,7 +39,6 @@
 
 <script setup>
 import { computed, ref } from "vue";
-import formatDate from "/src/helpers/formatDate.js";
 import DeleteModal from "/src/components/modal/DeleteModal.vue";
 
 const props = defineProps(["tableData"]);
@@ -52,3 +52,12 @@ const deleteUser = (id) => {
 };
 const emit = defineEmits(["delete"]);
 </script>
+
+<style scoped>
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+</style>

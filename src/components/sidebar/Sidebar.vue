@@ -124,6 +124,12 @@ const props = defineProps(["sidebarOpen"]);
 
 const routes = reactive([
   {
+    id: 0,
+    name: "Dashboard",
+    path: "/",
+    icon: "/src/assets/icons/dashboard.svg",
+  },
+  {
     id: 1,
     name: "Products",
     path: "/energyProducts",
@@ -133,38 +139,38 @@ const routes = reactive([
     id: 2,
     name: "Partners",
     path: "/partners",
-    icon: "/src/assets/icons/dashboard_diagram.svg",
+    icon: "/src/assets/icons/user.svg",
   },
   {
     id: 3,
     name: "Contacts",
     path: "/contacts",
-    icon: "/src/assets/icons/dashboard_diagram.svg",
+    icon: "/src/assets/icons/menu.svg",
   },
   {
     id: 4,
     name: "Local Products",
     path: "/localProducts",
-    icon: "/src/assets/icons/dashboard_diagram.svg",
+    icon: "/src/assets/icons/shop.svg",
   },
   {
     id: 5,
     name: "News",
     path: "/news",
-    icon: "/src/assets/icons/dashboard_diagram.svg",
+    icon: "/src/assets/icons/market.svg",
   },
   {
     id: 6,
     name: "Calculates",
     path: "/calculates",
-    icon: "/src/assets/icons/dashboard_diagram.svg",
+    icon: "/src/assets/icons/menu.svg",
   },
 ]);
 </script>
 
 <style scoped>
-.router-link-active,
-.router-link-exact-active {
+nav .router-link-active,
+nav .router-link-exact-active {
   @apply text-gray-100 bg-opacity-25 bg-gray-700;
 }
 </style>

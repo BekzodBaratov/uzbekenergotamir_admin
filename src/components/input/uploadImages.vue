@@ -1,7 +1,5 @@
-Code
 <template>
   <div>
-    <label class="block my-2 text-sm font-medium text-gray-900">Rasm yuklash</label>
     <div
       v-if="!small"
       class="max-w-[300px] min-h-[170px] h-[170px] w-full flex items-center justify-center rounded-[10px] relative border border-dashed !border-black image-upload"
@@ -77,6 +75,7 @@ Code
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
 import { onMounted, reactive, ref } from "vue";
 
@@ -107,7 +106,7 @@ const handleFile = (event: any) => {
   if (event.target.files[0]) {
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (e) => {
-      image.url = e.target?.result;
+      image.url = e.target?.result as string;
     };
     send();
   }
@@ -121,15 +120,14 @@ const removeImage = () => {
   image.url = null;
   send();
 };
-const send = () => {
-  emit("upload", image);
-};
+const send = () => emit("upload", image);
 onMounted(() => {
   if (props.item) {
     image.url = props.item;
   }
 });
 </script>
+
 <style>
 .color {
   color: #e74c3c;

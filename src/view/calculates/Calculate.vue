@@ -2,9 +2,6 @@
   <section>
     <div class="flex justify-between items-center mb-4">
       <h3 class="text-gray-700 text-3xl font-medium">Calculate bo'limi</h3>
-      <router-link to="/calculates/add">
-        <SButton variant="primary">Yangi calculate qo'shish</SButton>
-      </router-link>
     </div>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">

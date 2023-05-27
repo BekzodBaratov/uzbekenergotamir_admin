@@ -10,7 +10,6 @@ export const usePartnerStore = defineStore("partners", {
       try {
         const res = await axios.get("/partners");
         this.partners = res.data.partners;
-        console.log(this.partners);
       } catch (error) {
         toast.error(error.message);
       }
@@ -19,9 +18,7 @@ export const usePartnerStore = defineStore("partners", {
       const toast = useToast();
       try {
         const res = await axios.post("/partners", data);
-        // this.partners = res.data.partners;
-        this.partners.push(res.data.partner.image.secure_url);
-        console.log(res);
+        this.partners.push({ image: { secure_url: res.data.partner.image.secure_url } });
       } catch (error) {
         toast.error(error.message);
       }

@@ -8,7 +8,7 @@ export const useEnergyProductsStore = defineStore("energyProducts", {
     async getAllEnergyProducts() {
       const toast = useToast();
       try {
-        const res = await axios.get("/energyProducts");
+        const res = await axios.get("/energyProducts", { headers: { "Accept-language": "ru" } });
         this.energyProducts = res.data.energyProducts;
         console.log(res.data);
       } catch (error) {

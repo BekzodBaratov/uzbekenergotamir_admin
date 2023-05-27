@@ -23,6 +23,7 @@ watch(
   () => store.contacts,
   (data) => {
     if (data.length) {
+      console.log(data);
       tableData.thead = Object.keys(data[0]);
       tableData.tbody = data.map((el) => Object.values(el));
     }

@@ -3,7 +3,7 @@
 
   <form method="POST">
     <div class="space-y-8">
-      <div class="grid md:grid-cols-2 w-full justify-center items-center gap-2">
+      <div class="grid md:grid-cols-2 w-full gap-2">
         <ProductInput v-model="form.title_uz" label="Sarlavha" />
         <ProductInput v-model="form.title_ru" label="Заголовок" />
         <ProductInput v-model="form.title_en" label="Title" />
@@ -73,7 +73,9 @@ const handleSubmit = async () => {
   }
 };
 
-const getImages = (e) => (form.imageFiles = e.file);
+const getImages = (e) => {
+  form.imageFiles = e.file;
+};
 const chooseProduct = (val) => (form.category = val);
 </script>
 

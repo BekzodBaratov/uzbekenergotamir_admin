@@ -25,7 +25,7 @@
           <input
             type="email"
             v-model="state.email"
-            class="form-input py-2 px-2 mt-1 block w-full rounded-md focus:border-indigo-600"
+            class="form-input bg-gray-200 py-2 px-2 mt-1 block w-full rounded-md focus:border-indigo-600"
           />
         </label>
 
@@ -34,7 +34,7 @@
           <input
             type="password"
             v-model="state.password"
-            class="form-input py-2 px-2 mt-1 block w-full rounded-md focus:border-indigo-600"
+            class="form-input bg-gray-200 py-2 px-2 mt-1 block w-full rounded-md focus:border-indigo-600"
           />
         </label>
         <div class="mt-6">

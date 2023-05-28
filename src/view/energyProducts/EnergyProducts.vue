@@ -37,21 +37,5 @@ watch(
     }
   }
 );
-// watch(
-//   () => store.localProducts,
-//   (data) => {
-//     if (data.length) {
-//       tableData.thead = Object.keys(data[0]);
-//       tableData.tbody = data.map((el) => {
-//         if (typeof el == "object") {
-//           return Object.values(el[0]);
-//         } else {
-//           return Object.values(el);
-//         }
-//       });
-//     }
-//   }
-// );
-
 const fetchDelete = (id) => store.delEnergyProducts(id);
 </script>

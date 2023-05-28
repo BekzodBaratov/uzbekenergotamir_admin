@@ -25,7 +25,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["on-change"]);
+const emit = defineEmits(["on-change", "update:modelValue"]);
 
 const inputVal = ref(props.modelValue);
 

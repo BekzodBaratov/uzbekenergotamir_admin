@@ -15,8 +15,24 @@ export const useEnergyProductsStore = defineStore("energyProducts", {
         toast.error(error.response.data.message);
       }
     },
+    addEnergyProduct: async function (data) {
+      const toast = useToast();
+      try {
+        await axios.post("/energyProducts", data);
+        toast.success("product successfully created");
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
+    },
     async delEnergyProducts(id) {
-      console.log(id);
+      const toast = useToast();
+      try {
+        await axios.delete(`/energyProducts/${id}`);
+        this.energyProducts = this.energyProducts.filter((el) => el._id !== id);
+      } catch (error) {
+        console.log(error);
+        toast.error(error.message);
+      }
     },
   },
 });

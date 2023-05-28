@@ -1,131 +1,142 @@
 <template>
   <div>
-    <div
-      v-if="!small"
-      class="max-w-[300px] min-h-[170px] h-[170px] w-full flex items-center justify-center rounded-[10px] relative border border-dashed !border-black image-upload"
-      :class="[
-        {
-          'border-2 border-dashed border-[#E9ECF0]': !image.url,
-          '!border-[#e74c3c]': error,
-        },
-      ]"
-    >
-      <input
-        id="file"
-        type="file"
-        name="file"
-        class="w-0 h-0 absolute"
-        accept="image/png, image/jpeg"
-        @change="handleFile"
-      />
-      <div v-if="image.url" class="w-full h-full flex-center relative object-cover">
-        <img
-          :src="image.url"
-          alt="avatar"
-          class="w-full h-full object-cover relative z-0 rounded-[10px]"
-          @error="image.url = null"
+    <div v-if="multiplebol" class="flex gap-3 flex-wrap">
+      <div
+        v-if="imageUrls.length < 5"
+        class="max-w-[300px] min-h-[170px] h-[170px] w-full flex items-center justify-center rounded-[10px] relative border border-dashed !border-black image-upload"
+      >
+        <input
+          id="file"
+          type="file"
+          name="file"
+          class="w-0 h-0 absolute inset-0"
+          accept="image/png, image/jpeg"
+          @change="handleFile"
+          :multiple="multiplebol"
         />
         <div
-          class="absolute top-0 left-0 bg-[#27314099] w-full h-full flex items-center justify-center z-20 rounded-[10px] cursor-pointer"
-          @click="removeImage"
+          class="w-full h-full absolute top-0 flex items-center justify-center flex-col gap-5 cursor-pointer"
+          @click="getFile"
         >
-          <span class="text-white text-2xl">remove Image</span>
+          <p class="text-[#8390A6] text-base font-normal opacity-80">
+            {{ desc }}
+          </p>
         </div>
       </div>
       <div
-        v-else
-        class="w-full h-full absolute top-0 flex items-center justify-center flex-col gap-5 cursor-pointer"
-        @click="getFile"
+        v-for="(url, i) in imageUrls"
+        :key="i"
+        class="max-w-[300px] min-h-[170px] h-[170px] w-full flex items-center justify-center rounded-[10px] relative border border-dashed !border-black image-upload"
       >
-        <p class="text-[#8390A6] text-base font-normal opacity-80">
-          {{ desc }}
-        </p>
+        <div class="w-full h-full flex-center relative object-cover">
+          <img
+            :src="url.urlData"
+            alt="avatar"
+            class="w-full h-full object-cover relative z-0 rounded-[10px]"
+            @error="imageUrls = []"
+          />
+          <div
+            class="absolute top-0 left-0 bg-[#27314099] w-full h-full flex items-center justify-center z-20 rounded-[10px] cursor-pointer"
+            @click="removeImage()"
+          >
+            <span class="text-white text-2xl">Remove Image</span>
+          </div>
+        </div>
       </div>
     </div>
-    <div v-else class="p-2 bg-[#E9ECF0] rounded-[4px] relative">
-      <input
-        accept="image/png, image/jpeg, image/*"
-        id="file"
-        type="file"
-        name="file"
-        class="w-0 h-0 absolute"
-        @change="handleFile"
-      />
-      <div v-if="image.url" class="w-full h-full flex items-center justify-between">
-        <div class="flex gap-4 items-center">
+    <div v-if="!multiplebol">
+      <div
+        class="max-w-[300px] min-h-[170px] h-[170px] w-full flex items-center justify-center rounded-[10px] relative border border-dashed !border-black image-upload"
+      >
+        <input
+          id="file"
+          type="file"
+          name="file"
+          class="w-0 h-0 absolute inset-0"
+          accept="image/png, image/jpeg"
+          @change="handleFile"
+          :multiple="multiplebol"
+        />
+        <div v-if="imageUrls.length" class="w-full h-full flex-center relative object-cover">
           <img
-            :src="image.url"
+            :src="imageUrls[0].urlData"
             alt="avatar"
-            class="w-[52px] h-[52px] object-cover relative z-0 rounded-[4px]"
-            @error="image.url = null"
+            class="w-full h-full object-cover relative z-0 rounded-[10px]"
+            @error="imageUrls = []"
           />
-          <p v-if="imageName" class="text-[#273140] text-base leading-6">
-            {{ imageName }}
+          <div
+            class="absolute top-0 left-0 bg-[#27314099] w-full h-full flex items-center justify-center z-20 rounded-[10px] cursor-pointer"
+            @click="removeImage()"
+          >
+            <span class="text-white text-2xl">Remove Image</span>
+          </div>
+        </div>
+        <div
+          v-else
+          class="w-full h-full absolute top-0 flex items-center justify-center flex-col gap-5 cursor-pointer"
+          @click="getFile"
+        >
+          <p class="text-[#8390A6] text-base font-normal opacity-80">
+            {{ desc }}
           </p>
         </div>
-        <div class="rounded-[4px] cursor-pointer !h-7 flex-center mr-2 bg-red" @click="removeImage">
-          <span class="text-sm text-red-400">remove</span>
-        </div>
-      </div>
-      <div v-else class="w-full h-full flex items-center gap-5 cursor-pointer" @click="getFile">
-        <p class="text-[#8390A6] text-xs font-normal opacity-80">
-          {{ desc }}
-        </p>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from "vue";
+import { reactive, ref, withDefaults } from "vue";
 
 const emit = defineEmits(["upload"]);
 interface Props {
-  item: any;
-  small: boolean;
   error: boolean;
   desc: string;
   image: string;
+  multiplebol: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
-  item: "",
-  small: false,
   error: false,
+  multiplebol: false,
   desc: "Upload images",
 });
-const image = reactive({
-  url: props?.image,
-  file: null,
-});
 
-let imageName = ref("");
+const image = reactive({ files: null, file: null });
+
+let imageUrls = ref([]);
 const handleFile = (event: any) => {
-  image.file = event.target.files[0];
-  imageName.value = image.file?.name;
-  const reader = new FileReader();
-  if (event.target.files[0]) {
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onload = (e) => {
-      image.url = e.target?.result as string;
-    };
-    send();
+  if (event.target.files.length > 4) return alert("Please select a file to upload less than 4 files");
+  if (props.multiplebol) {
+    image.files = event.target.files;
+    if (event.target.files[0]) {
+      for (let i = 0; i < event.target.files.length; i++) {
+        const reader = new FileReader();
+        reader.readAsDataURL(event.target.files[i]);
+        reader.onload = (e) => {
+          imageUrls.value.push({ urlData: e.target.result, name: event.target.files[i].name });
+        };
+      }
+      send();
+    }
+  } else {
+    image.file = event.target.files[0];
+    if (event.target.files[0]) {
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (e) => {
+        imageUrls.value.push({ urlData: e.target.result, name: event.target.files[0].name });
+      };
+      send();
+    }
   }
 };
-const getFile = () => {
-  const input = document.getElementById("file");
-  input?.click();
-};
+const getFile = () => document.getElementById("file")?.click();
 const removeImage = () => {
-  image.file = null;
-  image.url = null;
+  imageUrls.value = [];
+  image.files = null;
   send();
 };
 const send = () => emit("upload", image);
-onMounted(() => {
-  if (props.item) {
-    image.url = props.item;
-  }
-});
 </script>
 
 <style>

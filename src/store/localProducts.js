@@ -18,12 +18,9 @@ export const useLocalProductsStore = defineStore("localProducts", {
     addLocalProducts: async function (data) {
       const toast = useToast();
       try {
-        const res = await axios.post("/products", data);
-        // this.localProducts = res.data.localProducts;
-        // this.localProducts.push(res.data.partner.image.secure_url);
-        console.log(res);
+        await axios.post("/products", data);
       } catch (error) {
-        toast.error(error.message);
+        toast.error(error.response.data.message);
       }
     },
     delLocalProducts: async function (id) {

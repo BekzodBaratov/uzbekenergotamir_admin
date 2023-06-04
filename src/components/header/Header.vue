@@ -94,7 +94,7 @@
         </div>
       </div> -->
 
-      <!-- <div class="profile relative">
+      <div class="profile relative">
         <button
           @click="dropdownOpen = !dropdownOpen"
           class="relative block w-8 h-8 overflow-hidden rounded-full bg-gray-700 shadow focus:outline-none"
@@ -108,23 +108,31 @@
         <div
           v-show="dropdownOpen"
           class="absolute right-0 z-10 w-48 mt-2 overflow-hidden bg-white rounded-md shadow-xl"
+          @click="handleLogout"
         >
-          <RouterLink to="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
-            >Products</RouterLink
-          >
-          <RouterLink to="/login" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
-            >Logout</RouterLink
+          <div class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white" 
+            >
+            Logout
+            </div
           >
         </div>
-      </div> -->
+      </div>
     </div>
   </header>
 </template>
 
 <script setup>
-import { RouterLink } from "vue-router";
 import { ref } from "vue";
+import {admin} from "../../store/admin"
+import { useRouter } from "vue-router";
+const store = admin()
+const router = useRouter()
 const emit = defineEmits(["openSidebar2"]);
 // const notificationOpen = ref(false);
 const dropdownOpen = ref(false);
+
+function handleLogout(){
+  store.logout();
+  router.push('/login')
+}
 </script>

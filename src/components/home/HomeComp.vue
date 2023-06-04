@@ -29,6 +29,11 @@ import SButton from "../buttons/SButton.vue";
 import { useDashboardStore } from "/src/store/dashboard";
 import { admin } from "/src/store/admin";
 import { useRouter } from "vue-router";
+
+import user from "/src/assets/icons/user.svg"
+import market from "/src/assets/icons/market.svg"
+import shop from "/src/assets/icons/shop.svg"
+
 const dashboardStore = useDashboardStore();
 const adminsStore = admin();
 const router = useRouter();
@@ -39,19 +44,19 @@ const statisticCardArr = reactive([
   {
     id: 1,
     title: "Adminlar",
-    icon: "/src/assets/icons/user.svg",
+    icon: user,
     number: 0,
   },
   {
     id: 2,
     title: "Quyosh panellari",
-    icon: "/src/assets/icons/market.svg",
+    icon: market,
     number: 0,
   },
   {
     id: 3,
     title: "Suv Isituvchi Panellar",
-    icon: "/src/assets/icons/shop.svg",
+    icon: shop,
     number: 0,
   },
 ]);

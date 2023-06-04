@@ -49,6 +49,11 @@ export const admin = defineStore("admin", {
         }
       });
     },
+    logout(){
+      this.token = ""
+      this.users = ""
+      this.role = 'admin'
+    }
   },
   persist: true,
 });

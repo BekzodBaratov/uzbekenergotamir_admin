@@ -11,7 +11,7 @@
         <Select class="w-full" :data="selectData" label="Yangiliklar" @getVal="chooseProduct"></Select>
       </div>
 
-      <UploadImages @upload="getImages" />
+      <UploadImages :multiplebol="false" desc="Upload images" :error="''" image="" @upload="getImages" />
 
       <Textarea v-model="form.description_uz" placeholder="Ta'rif"></Textarea>
       <Textarea v-model="form.description_ru" placeholder="Описание"></Textarea>

@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center mb-4">
       <h3 class="text-gray-700 text-3xl font-medium min-w-max">Mahalliylashtirilgan Mahsulotlar bo'limi</h3>
       <router-link to="/localProducts/add">
-        <SButton variant="primary" class="ml-auto mt-3" @click="onSubmit">Add Admin</SButton>
+        <SButton variant="primary" class="ml-auto mt-3" >Add Admin</SButton>
       </router-link>
     </div>
 

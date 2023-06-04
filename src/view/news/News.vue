@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center mb-4">
       <h3 class="text-gray-700 text-3xl font-medium min-w-max">Yangiliklar bo'limi</h3>
       <RouterLink to="/news/add">
-        <SButton variant="primary" class="ml-auto mt-3" @click="onSubmit">Yangiliklar qo'shish</SButton>
+        <SButton variant="primary" class="ml-auto mt-3">Yangiliklar qo'shish</SButton>
       </RouterLink>
     </div>
 

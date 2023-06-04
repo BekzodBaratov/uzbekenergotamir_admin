@@ -4,7 +4,7 @@
 
     <form method="POST">
       <div class="space-y-6">
-        <UploadImages desc="Upload Partner Icon" @upload="getImages" />
+        <UploadImages :multiplebol="false" desc="Upload Partner images" :error="''" image="" @upload="getImages" />
 
         <button
           type="submit"

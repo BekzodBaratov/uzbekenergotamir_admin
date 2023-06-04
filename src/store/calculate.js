@@ -11,6 +11,7 @@ export const useCalculatesStore = defineStore("calculates", {
         const res = await axios.get("/calculates");
         this.calculates = res.data.calculates;
       } catch (error) {
+        console.log(error);
         toast.error(error.response.data.message);
       }
     },

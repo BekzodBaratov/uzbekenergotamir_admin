@@ -13,11 +13,13 @@
 <script setup>
 import { reactive } from "vue";
 import { useToast } from "vue-toastification";
+import {useRouter} from "vue-router";
 import ProductInput from "../components/input/productInput.vue";
 import SButton from "../components/buttons/SButton.vue";
 import { admin } from "/src/store/admin";
 const toast = useToast();
 const store = admin();
+const router = useRouter();
 
 const form = reactive({ username: "", email: "", password: "" });
 
@@ -34,6 +36,7 @@ const handleSubmit = (e) => {
 const fetchData = async (data) => {
   try {
     await store.addUser(data);
+    router.push('/')
   } catch (error) {
     toast.error(error);
   } finally {

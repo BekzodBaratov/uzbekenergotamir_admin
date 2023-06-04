@@ -30,9 +30,7 @@ export const admin = defineStore("admin", {
       const toast = useToast();
       try {
         const res = await axios.delete(`/users/${id}`);
-        console.log(res.data.user._id);
         this.users = this.users.filter((user) => user._id !== res.data.user._id);
-        console.log(this.users);
         toast.success(res.data.message);
       } catch (error) {
         toast.error(error.response.data.message);

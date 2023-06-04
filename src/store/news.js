@@ -10,7 +10,6 @@ export const useNewsStore = defineStore("news", {
       try {
         const res = await axios.get("/news", { headers: { "Accept-language": "ru" } });
         this.news = res.data.news;
-        console.log(this.news);
       } catch (error) {
         toast.error(error.message);
       }
@@ -18,13 +17,10 @@ export const useNewsStore = defineStore("news", {
     addNews: async function (data) {
       const toast = useToast();
       try {
-        console.log(data);
         const res = await axios.post("/news", data);
         // this.News = res.data.News;
         // this.News.push(res.data.partner.image.secure_url);
-        console.log(res);
       } catch (error) {
-        console.log(error);
         toast.error(error.message);
       }
     },

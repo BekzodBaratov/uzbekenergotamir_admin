@@ -26,8 +26,6 @@ const tableData = reactive({ thead: [], tbody: [] });
 watch(
   () => store.energyProducts,
   (data) => {
-    console.log(tableData);
-    console.log(data[0]);
     if (data.length) {
       tableData.thead = Object.keys(data[0]);
       tableData.tbody = data.map((el) => {

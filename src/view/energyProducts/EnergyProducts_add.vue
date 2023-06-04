@@ -75,7 +75,6 @@ const handleSubmit = async () => {
 };
 
 const getImages = (e) => {
-  console.log(e.files);
   form.imageFiles = e.files;
 };
 const chooseProduct = (val) => (form.category = val);

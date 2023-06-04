@@ -29,7 +29,6 @@ const handleSubmit = (e) => {
   formData.append("username", form.username);
   formData.append("email", form.email);
   formData.append("password", form.password);
-  console.log(formData);
   fetchData(formData);
 };
 

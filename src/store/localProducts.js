@@ -10,7 +10,6 @@ export const useLocalProductsStore = defineStore("localProducts", {
       try {
         const res = await axios.get("/products", { headers: { "Accept-language": "ru" } });
         this.localProducts = res.data.products;
-        console.log(this.localProducts);
       } catch (error) {
         toast.error(error.message);
       }

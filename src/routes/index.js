@@ -41,7 +41,6 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const store = admin();
   if ("auth" in to.meta && to.meta.auth && !store.isRegisteration) {
-    console.log(store.token);
     next("/login");
   } else if ("auth" in to.meta && !to.meta.auth && store.isRegisteration) {
     next("/");

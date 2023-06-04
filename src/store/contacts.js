@@ -10,7 +10,6 @@ export const useContactsStore = defineStore("contacts", {
       try {
         const res = await axios.get("/contacts");
         this.contacts = res.data.contacts;
-        console.log(this.contacts);
       } catch (error) {
         toast.error(error.message);
       }

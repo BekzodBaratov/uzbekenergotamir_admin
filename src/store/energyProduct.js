@@ -10,7 +10,6 @@ export const useEnergyProductsStore = defineStore("energyProducts", {
       try {
         const res = await axios.get("/energyProducts", { headers: { "Accept-language": "ru" } });
         this.energyProducts = res.data.energyProducts;
-        console.log(res.data);
       } catch (error) {
         toast.error(error.response.data.message);
       }
@@ -30,7 +29,6 @@ export const useEnergyProductsStore = defineStore("energyProducts", {
         await axios.delete(`/energyProducts/${id}`);
         this.energyProducts = this.energyProducts.filter((el) => el._id !== id);
       } catch (error) {
-        console.log(error);
         toast.error(error.message);
       }
     },

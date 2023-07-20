@@ -7,8 +7,11 @@
       </router-link>
     </div>
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <Table :tableData="tableData" @delete="fetchDelete"></Table>
+    <div v-if="store.energyProducts.length" class="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <Table :tableData="tableData" :isLoading="store.deleteLoading" @delete="fetchDelete"></Table>
+    </div>
+    <div v-else>
+      <h2 class="text-gray-700 text-3xl font-medium min-w-max text-center mt-20">Products Not Found</h2>
     </div>
   </section>
 </template>
@@ -28,12 +31,12 @@ watch(
   (data) => {
     if (data.length) {
       tableData.thead = Object.keys(data[0]);
-      tableData.tbody = data.map((el) => {
-        el.images = el.images[0];
-        return Object.values(el);
-      });
+      tableData.tbody = data.map((el) => Object.values(el));
     }
   }
 );
-const fetchDelete = (id) => store.delEnergyProducts(id);
+const fetchDelete = (id) => {
+  store.delEnergyProducts(id);
+  store.deleteLoading = id;
+};
 </script>

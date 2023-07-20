@@ -4,8 +4,11 @@
       <h3 class="text-gray-700 text-3xl font-medium">Calculate bo'limi</h3>
     </div>
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <Table :tableData="tableData" @delete="fetchDelete"></Table>
+    <div v-if="store.calculates.length" class="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <Table :tableData="tableData" :isLoading="store.deleteLoading" @delete="fetchDelete"></Table>
+    </div>
+    <div v-else>
+      <h2 class="text-gray-700 text-3xl font-medium min-w-max text-center mt-20">Calculates Not Found</h2>
     </div>
   </section>
 </template>

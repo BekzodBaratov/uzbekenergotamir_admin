@@ -19,17 +19,15 @@
     <tbody class="bg-white">
       <tr v-for="item in tableData.tbody" :key="item[0]">
         <td v-for="el in item" :key="el" class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-          <p v-if="!el?.secure_url" class="line-clamp-3">{{ el }}</p>
+          <p v-if="typeof el !== 'object'" class="line-clamp-3">{{ el }}</p>
+          <img class="w-full" v-else-if="el.length >= 2" :src="el[0].secure_url" alt="image" />
           <img class="w-full" v-else :src="el.secure_url" alt="image" />
         </td>
 
         <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-          <button
-            class="bg-[#DC3545] text-white px-4 py-2 rounded-[8px] transition-all duration-300 hover:bg-[red]"
-            @click="deleteUser(item[0])"
-          >
+          <SButton variant="primary" :loading="props.isLoading == item[0]" @click="deleteUser(item[0])">
             O'chirish
-          </button>
+          </SButton>
           <DeleteModal :is-open="openModal" @delete="emit('delete', deleteId)" @closeModal="openModal = $event" />
         </td>
       </tr>
@@ -40,8 +38,9 @@
 <script setup>
 import { computed, ref } from "vue";
 import DeleteModal from "/src/components/modal/DeleteModal.vue";
+import SButton from "./buttons/SButton.vue";
 
-const props = defineProps(["tableData"]);
+const props = defineProps(["tableData", "isLoading"]);
 const tableData = computed(() => props.tableData);
 const openModal = ref(false);
 const deleteId = ref(null);

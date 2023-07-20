@@ -8,7 +8,7 @@
     <template v-if="loading">
       <i
         :class="[
-          's-transition absolute-center-h absolute-center-v',
+          's-transition absolute-center-h absolute-center-v text-red-500',
           loading ? 'opacity-100 block' : 'opacity-0 hidden w-0',
         ]"
       >

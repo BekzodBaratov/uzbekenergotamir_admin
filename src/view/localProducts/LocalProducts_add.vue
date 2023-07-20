@@ -13,13 +13,9 @@
       <Textarea v-model="form.description_ru" placeholder="Описание"></Textarea>
       <Textarea v-model="form.description_en" placeholder="Description"></Textarea>
 
-      <button
-        type="submit"
-        @click.prevent="handleSubmit"
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-      >
+      <SButton type="submit" variant="primary" :loading="store.loading" @click.prevent="handleSubmit">
         Saqlash
-      </button>
+      </SButton>
     </div>
   </form>
 </template>
@@ -28,6 +24,7 @@
 import { reactive } from "@vue/reactivity";
 import ProductInput from "../../components/input/productInput.vue";
 import Textarea from "../../components/input/textarea.vue";
+import SButton from "../../components/buttons/SButton.vue";
 import UploadImages from "../../components/input/uploadImages.vue";
 import { useLocalProductsStore } from "../../store/localProducts";
 import { useRouter } from "vue-router";

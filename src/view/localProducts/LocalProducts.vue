@@ -3,14 +3,17 @@
     <div class="flex justify-between items-center mb-4">
       <h3 class="text-gray-700 text-3xl font-medium min-w-max">Mahalliylashtirilgan Mahsulotlar bo'limi</h3>
       <router-link to="/localProducts/add">
-        <SButton variant="primary" class="ml-auto mt-3" >Add Admin</SButton>
+        <SButton variant="primary" class="ml-auto mt-3">Add Admin</SButton>
       </router-link>
     </div>
 
-    <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+    <div v-if="store.localProducts.length" class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
       <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-        <TheBaseTable :table-data="tableData" @delete="deleteHandle" />
+        <TheBaseTable :table-data="tableData" :isLoading="store.deleteLoading" @delete="deleteHandle" />
       </div>
+    </div>
+    <div v-else>
+      <h2 class="text-gray-700 text-3xl font-medium min-w-max text-center mt-20">Products Not Found</h2>
     </div>
   </section>
 </template>

@@ -6,7 +6,7 @@
         <SButton variant="primary">Yangi Partner qo'shish</SButton>
       </router-link>
     </div>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
+    <div v-if="store.partners.length" class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
       <div
         v-for="partner in store.partners"
         class="relative bg-white p-8 rounded-xl flex justify-center items-center group"
@@ -17,6 +17,12 @@
           <SButton @click="delPartner(partner._id)" variant="danger">Delete</SButton>
         </div>
       </div>
+    </div>
+    
+    <div v-else>
+      <h2 class="text-gray-700 text-3xl font-medium min-w-max text-center mt-20">
+        Partners Not Found
+      </h2>
     </div>
   </section>
 </template>

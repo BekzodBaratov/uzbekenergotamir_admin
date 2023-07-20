@@ -4,10 +4,13 @@
       <h3 class="text-gray-700 text-3xl font-medium min-w-max">Contacts bo'limi</h3>
     </div>
 
-    <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+    <div v-if="store.contacts.length" class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
       <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-        <TheBaseTable :table-data="tableData" @delete="delContact" />
+        <TheBaseTable :table-data="tableData" :isLoading="store.deleteLoading" @delete="delContact" />
       </div>
+    </div>
+    <div v-else>
+      <h2 class="text-gray-700 text-3xl font-medium min-w-max text-center mt-20">Contacts Not Found</h2>
     </div>
   </section>
 </template>

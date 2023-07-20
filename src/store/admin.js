@@ -29,7 +29,7 @@ export const admin = defineStore("admin", {
     async delUser(id) {
       const toast = useToast();
       try {
-        const res = await axios.delete(`/users/${id}`);
+        const res = await axios.delete(`/users/${id}`,{ headers: { Authorization: "Bearer " + this.token } });
         this.users = this.users.filter((user) => user._id !== res.data.user._id);
         toast.success(res.data.message);
       } catch (error) {
@@ -40,7 +40,7 @@ export const admin = defineStore("admin", {
       const toast = useToast();
       await new Promise(async (resolve, reject) => {
         try {
-          const res = await axios.post(`/users`, data);
+          const res = await axios.post(`/users`, data, { headers: { Authorization: "Bearer " + this.token } });
           resolve(res.data);
           toast.success(res.data.message);
         } catch (error) {

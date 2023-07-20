@@ -6,13 +6,9 @@
       <div class="space-y-6">
         <UploadImages :multiplebol="false" desc="Upload Partner images" :error="''" image="" @upload="getImages" />
 
-        <button
-          type="submit"
-          @click.prevent="handleSubmit"
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-        >
+        <SButton type="submit" @click.prevent="handleSubmit" variant="primary" :loading="store.loading">
           Saqlash
-        </button>
+        </SButton>
       </div>
     </form>
   </section>
@@ -22,6 +18,7 @@
 import { reactive } from "@vue/reactivity";
 import UploadImages from "../../components/input/uploadImages.vue";
 import { usePartnerStore } from "../../store/partners";
+import SButton from "../../components/buttons/SButton.vue";
 import { useRouter } from "vue-router";
 const store = usePartnerStore();
 const router = useRouter();

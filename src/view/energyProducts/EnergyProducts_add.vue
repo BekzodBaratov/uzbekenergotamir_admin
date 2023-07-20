@@ -15,14 +15,12 @@
       <Textarea v-model="form.description_uz" placeholder="Ta'rif"></Textarea>
       <Textarea v-model="form.description_ru" placeholder="Описание"></Textarea>
       <Textarea v-model="form.description_en" placeholder="Description"></Textarea>
+      <Textarea v-model="form.meta_description" placeholder="Мета описание"></Textarea>
+      <Textarea v-model="form.meta_keywords" placeholder="Мета ключевые слова"></Textarea>
 
-      <button
-        type="submit"
-        @click.prevent="handleSubmit"
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-      >
+      <SButton type="submit" @click.prevent="handleSubmit" variant="primary" :loading="store.loading">
         Saqlash
-      </button>
+      </SButton>
     </div>
   </form>
 </template>
@@ -33,6 +31,7 @@ import ProductInput from "../../components/input/productInput.vue";
 import Textarea from "../../components/input/textarea.vue";
 import UploadImages from "../../components/input/uploadImages.vue";
 import Select from "../../components/input/select.vue";
+import SButton from "../../components/buttons/SButton.vue";
 import { useEnergyProductsStore } from "../../store/energyProduct";
 import { useRouter } from "vue-router";
 const store = useEnergyProductsStore();
@@ -51,16 +50,27 @@ const form = reactive({
   description_uz: "",
   description_ru: "",
   description_en: "",
+  meta_description: "",
+  meta_keywords: "",
   imageFiles: "",
 });
 
 const handleSubmit = async () => {
-  if (form.imageFiles) {
+  if (
+    form.imageFiles.length >= 2 &&
+    form.title_en &&
+    form.title_ru &&
+    form.title_uz &&
+    form.description_uz &&
+    form.description_ru &&
+    form.description_en &&
+    form.meta_description &&
+    form.meta_keywords
+  ) {
+    store.loading = true;
     let formData = new FormData();
     if (form.imageFiles.length) {
-      for (let i = 0; i < form.imageFiles.length; i++) {
-        formData.append("images", form.imageFiles[i]);
-      }
+      for (let i = 0; i < form.imageFiles.length; i++) formData.append("images", form.imageFiles[i]);
     }
     formData.append("category", form.category);
     formData.append("title_uz", form.title_uz);
@@ -69,14 +79,14 @@ const handleSubmit = async () => {
     formData.append("description_uz", form.description_uz);
     formData.append("description_ru", form.description_ru);
     formData.append("description_en", form.description_en);
+    formData.append("meta_description", form.meta_description);
+    formData.append("meta_keywords", form.meta_keywords);
     await store.addEnergyProduct(formData);
     router.push("/energyProducts");
   }
 };
 
-const getImages = (e) => {
-  form.imageFiles = e.files;
-};
+const getImages = (e) => (form.imageFiles = e.files);
 const chooseProduct = (val) => (form.category = val);
 </script>
 
